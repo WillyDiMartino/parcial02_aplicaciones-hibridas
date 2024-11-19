@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6709b3a289b860e5cce6ce6a"
+  },
+  "name": "Walter",
+  "lastname": "Di Martino",
+  "username": "walter01",
+  "email": "walter@gmail.com",
+  "password": "$2b$10$FbGfaz0RssSo105ApY2ToO7cke5EUX9XsbMbDxKgAj3Qlz.vMGxWa",
+  "role": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6709b48489b860e5cce6ce73"
+  },
+  "name": "Willy",
+  "lastname": "Di Martino",
+  "username": "Willy01",
+  "email": "willy@gmail.com",
+  "password": "$2b$10$JaR3.3VltGr.nNPgYfGaAONWPS2PsOUhBHdiHKFUdEE/UCfd9Lc9u",
+  "role": "super-admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670abc567e4829df062a3960"
+  },
+  "name": "Tomas",
+  "lastname": "Paravic",
+  "username": "tomas01",
+  "email": "tomas@gmail.com",
+  "password": "$2b$10$9JG9lgqHybpU4zyFAS0NYupcwIlQJ7Vg1dcAlelSh7gP7hNX6gNFa",
+  "role": "super-admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670fcf02c8accc077780e6b6"
+  },
+  "name": "Juan",
+  "lastname": "Pérez",
+  "username": "juanperez",
+  "email": "juan.perez@example.com",
+  "password": "$2b$10$ASyLgrj7WOAfibc9p7KYQO0t630wG2wv1TX3OJ05UmpV482hkdI.u",
+  "role": "user",
+  "__v": 0
+}]

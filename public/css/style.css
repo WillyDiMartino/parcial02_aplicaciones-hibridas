@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+main{
+    background-color: #15151d;
+    color: white;
+}
+
+.sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;  
+}
+
+.contenedor-inicial{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+.navbar {
+    background-color: #e10600;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.navbar-brand img{
+    width: 120px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.welcome{
+    background-image: url('../img/foto_ferrari.webp');
+    background-size: cover;
+    background-position: center;
+    height: 800px;
+    mask-image: linear-gradient(transparent, black, black, transparent);
+}
+
+.welcome div {
+width: 50%;
+text-align: end;
+padding-right: 100px;
+text-shadow:#000000 1px 1px 5px;
+background: linear-gradient(to right, transparent , rgba(21, 21, 29, 0.6) 20%);
+}
+
+.btn-api{
+background-color: #e10600;
+padding-inline: 4.5rem;
+padding-block: 0.4rem;
+border-radius: 100vh;
+color: white;
+text-decoration: none;
+transition: ease-in-out 0.2s;
+text-shadow: none;
+}
+
+.btn-api:hover{
+background-color: whitesmoke;
+color: #15151d;
+transition: ease-in-out 0.2s;
+}
+
+footer{
+    
+    background-color: #15151d;
+    color: white;  
+}
+
+footer div{
+    height: 300px;
+    padding: 1rem;
+}
+
+footer ul{
+    list-style: none;
+}
+
+footer span{
+    font-weight: bolder;
+}
+
+footer p{
+    text-align: center;
+    font-weight: bold;
+}
+
+pre {
+    background-color: #272735;
+    color: whitesmoke;              
+    border-radius: 5px;   
+    padding: 1rem;        
+}
+
+.code-text{
+    color: rgb(14, 191, 204);
+    font-weight: bold;
+}
+
+.btn-doc-hook a li{
+    font-weight: bold;
+}
+.btn-doc-hook a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.btn-doc-hook a li:hover{
+    color: #e10600;
+}
+

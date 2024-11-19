@@ -1,0 +1,196 @@
+[{
+  "_id": {
+    "$oid": "670abca17e4829df062a3963"
+  },
+  "name": "McLaren Formula 1 Team",
+  "base": "Woking, Reino Unido",
+  "teamChief": "Andrea Stella",
+  "powerUnit": "Mercedes",
+  "firstEntry": 1966,
+  "constructorPoints": 516,
+  "constructorChampionships": 8,
+  "driverOne": {
+    "$oid": "670abe467e4829df062a3965"
+  },
+  "driverTwo": {
+    "$oid": "670abee17e4829df062a3967"
+  },
+  "logoImg": "mclaren.webp",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670ac510bd8a162f22249246"
+  },
+  "name": "Ferrari",
+  "base": "Maranello, Italia",
+  "teamChief": "Fred Vasseur",
+  "powerUnit": "Ferrari",
+  "firstEntry": 1950,
+  "constructorPoints": 441,
+  "constructorChampionships": 16,
+  "logoImg": "ferrari.webp",
+  "__v": 0,
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818f4"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f9"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac541bd8a162f22249248"
+  },
+  "name": "Oracle Red Bull Racing",
+  "base": "Milton Keynes, Reino Unido",
+  "teamChief": "Christian Horner",
+  "powerUnit": "Honda RBPT",
+  "firstEntry": 1997,
+  "constructorPoints": 475,
+  "constructorChampionships": 6,
+  "logoImg": "redbull.webp",
+  "__v": 0,
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818fc"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f7"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac552bd8a162f2224924a"
+  },
+  "name": "Mercedes-AMG Petronas Formula One Team",
+  "base": "Brackley, Reino Unido",
+  "teamChief": "Toto Wolff",
+  "powerUnit": "Mercedes",
+  "firstEntry": 1970,
+  "constructorPoints": 329,
+  "constructorChampionships": 8,
+  "logoImg": "mercedes.webp",
+  "__v": 0,
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818f1"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f8"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac55fbd8a162f2224924c"
+  },
+  "name": "Aston Martin Aramco Formula One Team",
+  "base": "Silverstone, Reino Unido",
+  "teamChief": "Mike Krack",
+  "powerUnit": "Mercedes",
+  "firstEntry": 2018,
+  "constructorPoints": 86,
+  "constructorChampionships": 0,
+  "logoImg": "astonMartin.webp",
+  "__v": 0,
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818ed"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818fa"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac56abd8a162f2224924e"
+  },
+  "name": "Williams Racing",
+  "base": "Grove, Reino Unido",
+  "teamChief": "James Vowles",
+  "powerUnit": "Mercedes",
+  "firstEntry": 1978,
+  "constructorPoints": 16,
+  "constructorChampionships": 9,
+  "logoImg": "williams.webp",
+  "__v": 0,
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818ec"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818ef"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac86468cf1f8b31017cc0"
+  },
+  "name": "BWT Alpine F1 Team",
+  "base": "Enstone, Reino Unido",
+  "teamChief": "Oliver Oakes",
+  "powerUnit": "Renault",
+  "firstEntry": 1986,
+  "constructorPoints": 13,
+  "constructorChampionships": 0,
+  "logoImg": "alpine.webp",
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818f0"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f6"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac86468cf1f8b31017cc1"
+  },
+  "name": "MoneyGram Haas F1 Team",
+  "base": "Kannapolis, Estados Unidos",
+  "teamChief": "Ayao Komatsu",
+  "powerUnit": "Ferrari",
+  "firstEntry": 2016,
+  "constructorPoints": 31,
+  "constructorChampionships": 0,
+  "logoImg": "haas.webp",
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818f5"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f2"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac86468cf1f8b31017cc2"
+  },
+  "name": "Stake F1 Team Kick Sauber",
+  "base": "Hinwil, Suiza",
+  "teamChief": "Alessandro Alunni Bravi",
+  "powerUnit": "Ferrari",
+  "firstEntry": 1993,
+  "constructorPoints": 0,
+  "constructorChampionships": 0,
+  "logoImg": "sauber.webp",
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818ee"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818fd"
+  }
+},
+{
+  "_id": {
+    "$oid": "670ac86468cf1f8b31017cc3"
+  },
+  "name": "Visa Cash App RB Formula One Team",
+  "base": "Faenza, Italia",
+  "teamChief": "Laurent Mekies",
+  "powerUnit": "Honda RBPT",
+  "firstEntry": 1985,
+  "constructorPoints": 34,
+  "constructorChampionships": 0,
+  "logoImg": "visaRb.webp",
+  "driverOne": {
+    "$oid": "670adc8acafaeb1609b818fb"
+  },
+  "driverTwo": {
+    "$oid": "670adc8acafaeb1609b818f3"
+  }
+}]
