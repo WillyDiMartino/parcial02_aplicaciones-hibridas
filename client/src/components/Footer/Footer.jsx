@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
 
-            <div class="d-flex justify-content-around align-items-center">
+            <div className="d-flex justify-content-around align-items-center">
                 <a href="/"><img src={logo} alt="logo formula 1"  width="120" height="30"/></a>
                 <ul>
                     <span>Alumnos:</span>
