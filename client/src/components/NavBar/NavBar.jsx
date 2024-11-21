@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../../assets/img/f1_logo.png'
 import { Login, Register } from '../index'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import { AuthContext } from '../../context/AuthContext'
 
 const NavBar = () => {
 
@@ -15,6 +16,8 @@ const NavBar = () => {
     }
 
     const handleCloseModal = () => setShow(false);
+
+    const {user, setUser} = useContext(AuthContext);
 
     return (
         <header>
@@ -33,14 +36,23 @@ const NavBar = () => {
                     </button>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
+                            <a className="nav-link" href="/equipos">Equipos</a>
+                            <a className="nav-link" href="/corredores">Corredores</a>
                             <a className="nav-link" href="/documentacion">Documentación</a>
                             <div className="dropdown">
                                 <Button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Usuario
+                                    {user ? user.username : 'Usuario'}
                                 </Button>
                                 <ul className="dropdown-menu">
+                                    {user ? (
+                                        <li><Button className="dropdown-item">Cerrar sesión</Button></li>
+                                    ) : 
+                                    (
+                                    <>
                                     <li><Button className="dropdown-item" onClick={() => handleToogleModal('login')}>Login</Button></li>
                                     <li><Button className="dropdown-item" onClick={() => handleToogleModal('register')}>Register</Button></li>
+                                    </>
+                                    )}
                                 </ul>
                             </div>
                         </div>

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 
 const Login = ({handleCloseModal}) => {
   const [userData, setUserData] = useState({
@@ -13,8 +12,6 @@ const Login = ({handleCloseModal}) => {
 
   const  {setUser} = useContext(AuthContext);
 
-  const Navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:3000/usuarios/login', userData)
@@ -24,7 +21,6 @@ const Login = ({handleCloseModal}) => {
       Cookies.set('token', res.data.token, {expires: 3});
       setUserData({email: '', password: ''});
       handleCloseModal();
-      Navigate('/');
     })
     .catch((error) => {
       console.log(error);
