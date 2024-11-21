@@ -16,7 +16,7 @@
 #root{
   display: grid;
   grid-template-rows: auto 1fr auto;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .sr-only{
@@ -46,6 +46,19 @@
   color: white;
   text-decoration: none;
 }
+
+/*-----views-----*/
+
+.card-team, .card-driver{
+gap: 2rem;
+}
+
+.card-team li, .card-driver li{
+list-style: none;
+width: 300px;
+background-color: aqua;
+}
+
 
 /* Footer */
 

@@ -4,6 +4,7 @@ import { Login, Register } from '../index'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { AuthContext } from '../../context/AuthContext'
+import { Navigate } from 'react-router-dom'
 
 const NavBar = () => {
 
@@ -17,7 +18,12 @@ const NavBar = () => {
 
     const handleCloseModal = () => setShow(false);
 
-    const {user, setUser} = useContext(AuthContext);
+    const {user, logoutUser} = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logoutUser();
+        Navigate('/');
+    }
 
     return (
         <header>
@@ -45,7 +51,7 @@ const NavBar = () => {
                                 </Button>
                                 <ul className="dropdown-menu">
                                     {user ? (
-                                        <li><Button className="dropdown-item">Cerrar sesión</Button></li>
+                                        <li><Button className="dropdown-item" onClick={() => handleLogout()}>Cerrar sesión</Button></li>
                                     ) : 
                                     (
                                     <>
