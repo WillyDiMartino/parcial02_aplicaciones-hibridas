@@ -30,7 +30,7 @@ const Drivers = () => {
       {drivers.length > 0 ? (
         <DriverList drivers={drivers} />
       ) : (
-        <p>Cargando pilotos...</p> 
+        <h2 className='text-center my-5'>Tenés que inicar sesión para ver los corredores</h2>  
       )}
     </div>
   );

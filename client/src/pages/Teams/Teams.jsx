@@ -28,7 +28,7 @@ const Teams = () => {
       {teams.length > 0 ? (
         <TeamList teams={teams} />
       ) : (
-        <p>Cargando equipos...</p> 
+        <h2 className='text-center my-5'>Tenés que inicar sesión para ver los equipos</h2> 
       )}
     </div>
   );

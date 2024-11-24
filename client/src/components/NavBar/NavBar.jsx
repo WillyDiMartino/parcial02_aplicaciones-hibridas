@@ -4,9 +4,11 @@ import { Login, Register } from '../index'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { AuthContext } from '../../context/AuthContext'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
+
+    const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
     const [modalType, setModalType] = useState(null);
@@ -22,7 +24,7 @@ const NavBar = () => {
 
     const handleLogout = () => {
         logoutUser();
-        Navigate('/');
+        navigate('/');
     }
 
     return (

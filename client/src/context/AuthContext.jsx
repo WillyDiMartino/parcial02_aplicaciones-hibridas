@@ -16,7 +16,8 @@ export const AuthContextProvider = ({ children }) => {
             setUser({
                 name: decoded.user.name,
                 id: decoded.user._id,
-                username: decoded.user.username
+                username: decoded.user.username,
+                role: decoded.user.role
             });
         }
     }, [auth]);
