@@ -11,12 +11,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #15151d;
 }
 
 #root{
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
+  background-color: #15151d;
+  color: white;
 }
 
 .sr-only{
@@ -47,6 +50,74 @@
   text-decoration: none;
 }
 
+.welcome{
+  background-image: url('./assets/img/foto_ferrari.webp');
+  background-size: cover;
+  background-position: center;
+  height: 800px;
+  mask-image: linear-gradient(transparent, black, black, transparent);
+}
+
+.welcome div {
+width: 50%;
+text-align: end;
+padding-right: 100px;
+text-shadow:#000000 1px 1px 5px;
+background: linear-gradient(to right, transparent , rgba(21, 21, 29, 0.6) 20%);
+}
+
+.btn-api{
+background-color: #e10600;
+padding-inline: 4.5rem;
+padding-block: 0.4rem;
+border-radius: 100vh;
+color: white;
+text-decoration: none;
+transition: ease-in-out 0.2s;
+text-shadow: none;
+}
+
+.btn-api:hover{
+background-color: whitesmoke;
+color: #15151d;
+transition: ease-in-out 0.2s;
+}
+
+pre {
+  background-color: #272735;
+  color: whitesmoke;              
+  border-radius: 5px;   
+  padding: 1rem;        
+}
+
+.code-text{
+  color: rgb(14, 191, 204);
+  font-weight: bold;
+}
+
+.btn-doc-hook a li{
+  font-weight: bold;
+}
+.btn-doc-hook a{
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.btn-doc-hook a li:hover{
+  color: #e10600;
+}
+
+.accordion-button, .accordion-body {
+  background-color:#15151d !important;
+  border: none !important; 
+  color: white !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 /*-----views-----*/
 
 .card-team, .card-driver{
@@ -58,7 +129,6 @@ list-style: none;
 width: 300px;
 background-color: aqua;
 }
-
 
 /* Footer */
 
