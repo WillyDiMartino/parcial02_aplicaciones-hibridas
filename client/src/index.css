@@ -129,6 +129,27 @@ list-style: none;
 width: 300px;
 background-color: aqua;
 }
+/* buscador */
+
+#busqueda{
+    border-top-left-radius: 100vmax;
+    border-bottom-left-radius: 100vmax;
+    background-color: #e7e7e7;
+    width: 400px;
+}
+
+#button-addon2{
+    border-top-right-radius: 100vmax;
+    border-bottom-right-radius: 100vmax;
+    background-color: #e7e7e7;
+    border: none;
+    color:black;
+}
+
+.bi-search:hover{
+    color: #0167c8;
+}
+
 
 /* Footer */
 
@@ -155,4 +176,3 @@ footer p{
   text-align: center;
   font-weight: bold;
 }
-
