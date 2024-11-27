@@ -31,7 +31,7 @@ const Register = ({ handleCloseModal }) => {
 
   return (
     <div>
-      <h2>Registrate</h2>
+      <h2 className="modal-title">Registrate</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-3">
           <label className="form-label">Nombre</label>
@@ -83,9 +83,7 @@ const Register = ({ handleCloseModal }) => {
             id="password"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Registrarse
-        </button>
+        <button type="submit" className="custom-btn">Registrarse</button>
         {error && <div className="alert alert-danger mt-3" role="alert">{error}</div>}
       </form>
     </div>

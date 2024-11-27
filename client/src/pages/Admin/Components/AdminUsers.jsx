@@ -96,11 +96,15 @@ const AdminUsers = () => {
     <div className="container mt-4">
       <h1 className="text-center mb-4">Gestión de Usuarios</h1>
 
-      <Button variant="primary" className="mb-3" onClick={() => handleToogleModal('register')}>
+      <Button 
+        variant="primary" 
+        className="mb-3 btn-custom"
+        onClick={() => handleToogleModal('register')}
+      >
         Crear Usuario
       </Button>
 
-      <table className="table table-striped">
+      <table className="table table-striped table-custom">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -117,9 +121,8 @@ const AdminUsers = () => {
               <td>{user.role}</td>
               <td>
                 <Button
-                  variant="warning"
+                  className="btn-edit me-2"
                   size="sm"
-                  className="me-2"
                   onClick={() => {
                     setSelectedUser(user);
                     setShowEditModal(true);
@@ -128,7 +131,7 @@ const AdminUsers = () => {
                   Editar
                 </Button>
                 <Button
-                  variant="danger"
+                  className="btn-delete"
                   size="sm"
                   onClick={() => handleOpenDeleteModal(user)}
                 >

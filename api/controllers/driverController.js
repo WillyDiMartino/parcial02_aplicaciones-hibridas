@@ -2,6 +2,7 @@ import Driver from "../model/driverModel.js";
 import Team from "../model/teamModel.js";
 import { driverValidate } from "../validations/validation.js";
 
+// Obtener todos los conductores
 const getAllDrivers = async (req, res) => {
     try {
         const drivers = await Driver.find().populate('team');
@@ -11,6 +12,7 @@ const getAllDrivers = async (req, res) => {
     }
 };
 
+// Obtener un conductor por su ID
 const getDriverById = async (req, res) => {
     try {
         const driver = await Driver.findById(req.params.id).populate('team');
@@ -23,6 +25,7 @@ const getDriverById = async (req, res) => {
     }
 };
 
+// Crear un nuevo conductor
 const createDriver = async (req, res) => {
     const { error } = driverValidate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -35,6 +38,7 @@ const createDriver = async (req, res) => {
     }
 };
 
+// Actualizar un conductor existente
 const updateDriver = async (req, res) => {
     try {
         const updatedDriver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -47,6 +51,7 @@ const updateDriver = async (req, res) => {
     }
 };
 
+// Eliminar un conductor
 const deleteDriver = async (req, res) => {
     try {
         const deletedDriver = await Driver.findByIdAndDelete(req.params.id);
@@ -59,6 +64,7 @@ const deleteDriver = async (req, res) => {
     }
 };
 
+// Buscar por nombre
 const searchByName = async (req, res) => {
     const name = req.query.name;
     if (!name) {
@@ -77,10 +83,11 @@ const searchByName = async (req, res) => {
     }
 };
 
+// Buscar por apellido
 const searchByLastName = async (req, res) => {
     const lastname = req.query.lastname;
     if (!lastname) {
-        return res.status(400).json({ message: "El nombre es requerido para la búsqueda." });
+        return res.status(400).json({ message: "El apellido es requerido para la búsqueda." });
     }
     try {
         const driver = await Driver.find({ lastname: new RegExp(lastname, 'i') }).populate('team'); 
@@ -95,55 +102,55 @@ const searchByLastName = async (req, res) => {
     }
 };
 
-    const sortByPoints = async (req, res) => {
-        const { order } = req.query; 
-        let sortOrder = 1;
+// Ordenar por puntos
+const sortByPoints = async (req, res) => {
+    const { order } = req.query; 
+    let sortOrder = 1;
     
-        
-        if (order === 'desc') {
-            sortOrder = -1;
-        } else if (order === 'asc') {
-            sortOrder = 1;
-        }
-    
-        try {
-            const drivers = await Driver.find().sort({ points24: sortOrder }).populate('team');
-    
-            if (!drivers || drivers.length === 0) {
-                return res.status(404).json({ message: "No se encontraron conductores." });
-            }
-            res.status(200).json(drivers);
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Error interno del servidor" });
-        }
-    };
+    if (order === 'desc') {
+        sortOrder = -1;
+    } else if (order === 'asc') {
+        sortOrder = 1;
+    }
 
-    
-    const filterByRaceWins = async (req, res) => {
-        try {
-            const drivers = await Driver.find({ raceWins: { $gt: 0 } }).populate('team');
-            if (!drivers || drivers.length === 0) {
-                return res.status(404).json({ message: "No se encontraron conductores con una victoria." });
-            }
-            res.status(200).json(drivers);
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Error interno del servidor" });
-        }
-    };
+    try {
+        const drivers = await Driver.find().sort({ points24: sortOrder }).populate('team');
 
-    const filterByWorldChampionship = async (req, res) => {
-        try {
-            const drivers = await Driver.find({  worldChampionships: { $gt: 0 } }).populate('team');
-            if (!drivers || drivers.length === 0) {
-                return res.status(404).json({ message: "No se encontraron conductores con un campeonato ganado." });
-            }
-            res.status(200).json(drivers);
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Error interno del servidor" });
+        if (!drivers || drivers.length === 0) {
+            return res.status(404).json({ message: "No se encontraron conductores." });
         }
-    };
+        res.status(200).json(drivers);
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
 
-export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName, searchByLastName, sortByPoints, filterByRaceWins, filterByWorldChampionship};
+// Filtrar por carreras ganadas
+const filterByRaceWins = async (req, res) => {
+    try {
+        const drivers = await Driver.find({ raceWins: { $gt: 0 } }).populate('team');
+        if (!drivers || drivers.length === 0) {
+            return res.status(404).json({ message: "No se encontraron ganadores de carreras." });
+        }
+        res.status(200).json(drivers);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+// Filtrar por campeonatos mundiales
+const filterByWorldChampionship = async (req, res) => {
+    try {
+        const drivers = await Driver.find({ worldChampionships: { $gt: 0 } }).populate('team');
+        if (!drivers || drivers.length === 0) {
+            return res.status(404).json({ message: "No se encontraron campeones mundiales." });
+        }
+        res.status(200).json(drivers);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName, searchByLastName, sortByPoints, filterByRaceWins, filterByWorldChampionship };

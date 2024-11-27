@@ -7,21 +7,18 @@ import ClipLoader from 'react-spinners/ClipLoader';
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
   const [search, setSearch] = useState('');
-  const [sortOrder, setSortOrder] = useState(''); // Estado para el orden de puntos
+  const [sortOrder, setSortOrder] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useContext(AuthContext);
 
-  // Función para obtener corredores desde el backend
   const fetchDrivers = async (searchQuery = '', sort = '') => {
     try {
       let endpoint = 'http://localhost:3000/api/corredores';
       
-      // Agregar el query de búsqueda al endpoint si hay un texto de búsqueda
       if (searchQuery) {
         endpoint += `/search?name=${searchQuery}`;
       }
       
-      // Agregar el parámetro de orden si se especifica
       if (sort) {
         endpoint += `/sort/points?order=${sort}`;
       }
@@ -29,7 +26,6 @@ const Drivers = () => {
       const res = await axios.get(endpoint, {
         headers: { token: auth },
       });
-      console.log(res.data);
       setDrivers(res.data);
       setTimeout(() => setIsLoading(false), 1000);
     } catch (error) {
@@ -37,63 +33,63 @@ const Drivers = () => {
     }
   };
 
-  // Efecto inicial para cargar los datos
   useEffect(() => {
     fetchDrivers();
-  }, []);
+  }, [auth]);
 
-  // Función para manejar el cambio de orden de puntos
   const handleSortChange = (order) => {
-    setSortOrder(order); // Actualiza el orden de los puntos
-    fetchDrivers(search, order); // Obtiene los datos ordenados
+    setSortOrder(order);
+    fetchDrivers(search, order);
   };
 
-  // Filtra los corredores según el texto ingresado en el buscador
   const filteredDrivers = drivers.filter((driver) =>
     `${driver.name} ${driver.lastname}`.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div>
-      {/* Buscador */}
-      <div className="input-group my-3">
-        <input
-          type="search"
-          className="form-control"
-          placeholder="Buscar"
-          aria-label="Buscar"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button className="btn btn-outline-secondary" type="button">
-          <i className="bi bi-search"></i>
-        </button>
+      {/* Buscador y Botones */}
+      <div className="d-flex flex-column align-items-center my-4">
+        {/* Buscador */}
+        <div className="input-group search-bar">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Buscar corredor"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button className="btn btn-search" type="button">
+            <i className="bi bi-search"></i>
+          </button>
+        </div>
+
+        {/* Botones para ordenar */}
+        <div className="d-flex justify-content-center mt-3 sort-buttons">
+          <button
+            className={`btn btn-f1 ${sortOrder === 'asc' ? 'btn-active' : ''} me-2`}
+            onClick={() => handleSortChange('asc')}
+          >
+            Ordenar Ascendente
+          </button>
+          <button
+            className={`btn btn-f1 ${sortOrder === 'desc' ? 'btn-active' : ''}`}
+            onClick={() => handleSortChange('desc')}
+          >
+            Ordenar Descendente
+          </button>
+        </div>
       </div>
 
-      {/* Ordenar por puntos */}
-      <div className="d-flex justify-content-center mb-3">
-        <button
-          className={`btn btn-secondary mx-2 ${sortOrder === 'asc' ? 'active' : ''}`}
-          onClick={() => handleSortChange('asc')}
-        >
-          Ordenar Ascendente
-        </button>
-        <button
-          className={`btn btn-secondary mx-2 ${sortOrder === 'desc' ? 'active' : ''}`}
-          onClick={() => handleSortChange('desc')}
-        >
-          Ordenar Descendente
-        </button>
-      </div>
-
-      {}
-       {isLoading ? (
+      {/* Contenido */}
+      {isLoading ? (
         <div className="text-center my-5">
-          <ClipLoader color="" size={50} />
+          <ClipLoader color="#e10600" size={50} />
         </div>
       ) : filteredDrivers.length > 0 ? (
         <DriverList drivers={filteredDrivers} />
       ) : (
-        <h2 className="text-center my-5">No se encontraron equipos.</h2>
+        <h2 className="text-center my-5">No se encontraron corredores.</h2>
       )}
     </div>
   );
