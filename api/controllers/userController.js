@@ -46,24 +46,27 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const updateUser = await Users.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updateUser) return res.status(404).json({ message: "Usuario no encontrado" });
-        res.json({ message: `Usuario ${updateUser.username} editado`});
-    }
-    catch (error) {
+        if (!updateUser) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+        res.json({ message: `Usuario ${updateUser.username} editado` });
+    } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
 const deleteUser = async (req, res) => {
     try {
-        const deleteUser = await Users.findByIdAndDelete(req.params.id);
-        if (!deleteUser) return res.status(404).json({ message: "Usuario no encontrado" });
-        res.json({ message: `Usuario ${deleteUser.username} eliminado`});
+      const userToDelete = await Users.findByIdAndDelete(req.params.id);
+      if (!userToDelete) {
+        return res.status(404).json({ mensaje: "Usuario no encontrado" });
+      }
+      res.json({ mensaje: `Usuario ${userToDelete.username} eliminado` });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en la eliminación del usuario.' });
     }
-    catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
+  };
 
 const loginUser = async (req, res) => {
     try {

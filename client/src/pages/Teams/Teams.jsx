@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { TeamList } from './TeamList';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('asc'); // Estado para el orden
+  const [isLoading, setIsLoading] = useState(true);
   const { auth } = useContext(AuthContext);
 
   const fetchTeams = async () => {
@@ -15,6 +17,7 @@ const Teams = () => {
         headers: { 'token': auth },
       });
       setTeams(res.data);
+      setTimeout(() => setIsLoading(false), 1000);
     } catch (error) {
       console.log(error);
     }
@@ -26,6 +29,7 @@ const Teams = () => {
         headers: { 'token': auth },
       });
       setTeams(res.data);
+      setTimeout(() => setIsLoading(false), 1000);
     } catch (error) {
       console.log(error);
     }
@@ -76,11 +80,15 @@ const Teams = () => {
         </button>
       </div>
 
-      {/* Lista de equipos */}
-      {filteredTeams.length > 0 ? (
+       {}
+       {isLoading ? (
+        <div className="text-center my-5">
+          <ClipLoader color="" size={50} />
+        </div>
+      ) : filteredTeams.length > 0 ? (
         <TeamList teams={filteredTeams} />
       ) : (
-        <h2 className="text-center my-5">Cargando</h2>
+        <h2 className="text-center my-5">No se encontraron equipos.</h2>
       )}
     </div>
   );

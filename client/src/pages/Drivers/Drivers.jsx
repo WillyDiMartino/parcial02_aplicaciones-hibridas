@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { DriverList } from './DriverList';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState(''); // Estado para el orden de puntos
+  const [isLoading, setIsLoading] = useState(true);
   const { auth } = useContext(AuthContext);
 
   // Función para obtener corredores desde el backend
@@ -29,6 +31,7 @@ const Drivers = () => {
       });
       console.log(res.data);
       setDrivers(res.data);
+      setTimeout(() => setIsLoading(false), 1000);
     } catch (error) {
       console.log(error);
     }
@@ -82,11 +85,15 @@ const Drivers = () => {
         </button>
       </div>
 
-      {/* Lista de corredores filtrados */}
-      {filteredDrivers.length > 0 ? (
+      {}
+       {isLoading ? (
+        <div className="text-center my-5">
+          <ClipLoader color="" size={50} />
+        </div>
+      ) : filteredDrivers.length > 0 ? (
         <DriverList drivers={filteredDrivers} />
       ) : (
-        <h2 className="text-center my-5">Cargando</h2>
+        <h2 className="text-center my-5">No se encontraron equipos.</h2>
       )}
     </div>
   );

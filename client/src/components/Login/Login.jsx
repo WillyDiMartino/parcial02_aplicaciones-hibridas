@@ -16,7 +16,6 @@ const Login = ({handleCloseModal}) => {
     e.preventDefault();
     await axios.post('http://localhost:3000/usuarios/login', userData)
     .then((res) => {
-      console.log(res);
       setUser(res.data.user);
       Cookies.set('token', res.data.token, {expires: 3});
       setUserData({email: '', password: ''});
