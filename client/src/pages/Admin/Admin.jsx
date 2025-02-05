@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCheckAccess } from '../../hooks/useCheckAccess';
-import { AdminUsers } from './Components/AdminUsers';
+import { AdminUsers, AdminTeams, AdminDrivers } from './Components';
 
 const Admin = () => {
   useCheckAccess('/admin');
@@ -10,7 +10,9 @@ const Admin = () => {
       <div className="admin-title-container">
         <h2 className="admin-title">Bienvenido al Administrador</h2>
       </div>
-      <AdminUsers />  
+      <AdminUsers />
+      <AdminTeams />
+      <AdminDrivers />
     </div>
   );
 }

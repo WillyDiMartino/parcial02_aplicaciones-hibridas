@@ -26,8 +26,7 @@ const Login = ({ handleCloseModal }) => {
   };
 
   return (
-    <div className="login-modal">
-      <div className="modal-content">
+    <div>
         <button className="close-btn" onClick={handleCloseModal}>
           &times;
         </button>
@@ -70,7 +69,6 @@ const Login = ({ handleCloseModal }) => {
             </div>
           )}
         </form>
-      </div>
     </div>
   );
 };

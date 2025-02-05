@@ -93,8 +93,8 @@ const AdminUsers = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Gestión de Usuarios</h1>
+    <div className="mt-4">
+      <h3 className="text-center mb-4">Gestión de Usuarios</h3>
 
       <Button 
         variant="primary" 

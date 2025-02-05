@@ -33,6 +33,7 @@ const createTeam = async (req, res) => {
     }
 };
 
+
 const updateTeam = async (req, res) => {
     try {
         const updatedTeam = await Teams.findByIdAndUpdate(req.params.id, req.body, { new: true });

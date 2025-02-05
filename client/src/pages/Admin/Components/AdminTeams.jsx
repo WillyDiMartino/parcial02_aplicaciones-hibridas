@@ -1,164 +1,81 @@
-// import React, { useContext, useEffect, useState } from 'react';
-// import axios from 'axios';
-// import { Modal, Button } from 'react-bootstrap';
-// import { AuthContext } from '../../../context/AuthContext';
-// import { EditTeamModal } from '../Modals/EditTeamModal';
-// import { DeleteTeamModal } from '../Modals/DeleteTeamModal';
-// import { Register } from '../../../components';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+import { AuthContext } from '../../../context/AuthContext';
+import { CreateTeamModal } from '../Modals/Teams/CreateTeamModal';
 
-// const AdminTeams = () => {
-//   const [teams, setTeams] = useState([]);
-//   const [show, setShow] = useState(false);
-//   const [selectedTeam, setSelectedTeam] = useState(null);
-//   const [showEditModal, setShowEditModal] = useState(false);
-//   const [showDeleteModal, setShowDeleteModal] = useState(false);
-//   const { auth } = useContext(AuthContext);
+const AdminTeams = () => {
+    const [teams, setTeams] = useState([]);
+    const { auth } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
 
-//   const handleCloseModal = () => setShow(false);
+    const handleToogleModal = () => setShow(!show);
 
-//   const handleToogleModal = (action) => {
-//     if (action === 'register') {
-//       setShow(true);
-//     }
-//   };
+    const fetchTeams = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/equipos', {
+                headers: { token: auth },
+            });
 
-//   const fetchTeams = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:3000/equipos', {
-//         headers: { token: auth },
-//       });
-//       setTeams(response.data);
-//     } catch (error) {
-//       console.error('Error al obtener equipos:', error);
-//     }
-//   };
+            setTeams(response.data);
+        } catch (error) {
+            console.error('Error al obtener equipos:', error);
+        }
+    };
 
-//   const handleEditTeam = async (updatedTeam) => {
-//     try {
-//       const response = await axios.put(
-//         `http://localhost:3000/equipos/${updatedTeam.id}`,
-//         updatedTeam,
-//         {
-//           headers: {
-//             token: auth,
-//           },
-//         }
-//       );
-//       if (response.status === 200) {
-//         fetchTeams();
-//       } else {
-//         console.error('Error al actualizar el equipo');
-//       }
-//     } catch (error) {
-//       console.error('Error en la solicitud:', error);
-//     }
-//   };
+    useEffect(() => {
+        fetchTeams();
+    }, []);
 
-//   const handleDeleteTeam = async () => {
-//     if (!selectedTeam?._id) {
-//       console.error("No se encontró el ID del equipo.");
-//       return;
-//     }
+    return (
+        <div className='mt-4'>
+            <h3 className='text-center mb-4'>Gestión de Equipos</h3>
+            <Button className='mb-3 btn-custom' onClick={handleToogleModal}>Crear Equipo</Button>
 
-//     if (!auth) {
-//       console.error("No se encontró el token de autenticación.");
-//       return;
-//     }
+            <table className="table table-striped table-custom">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Base</th>
+                        <th>Jefe</th>
+                        <th>Motor</th>
+                        <th>Ingreso</th>
+                        <th>Puntos de constructor</th>
+                        <th>Campeonatos de constructor</th>
+                        <th>Corredor 1</th>
+                        <th>Corredor 2</th>
+                        <th>Logo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {teams.map((team, index) => (
+                        <tr key={team.id || index}>
+                            <td>{team.name}</td>
+                            <td>{team.base}</td>
+                            <td>{team.teamChief}</td>
+                            <td>{team.powerUnit}</td>
+                            <td>{team.firstEntry}</td>
+                            <td>{team.constructorPoints}</td>
+                            <td>{team.constructorChampionships}</td>
+                            <td>{team.driverOne.lastname}</td>
+                            <td>{team.driverTwo.lastname}</td>
+                            <td>{team.logo}</td>
+                            <td>
+                                <Button className='btn-edit me-2'>Editar</Button>
+                                <Button className='btn-delete' onClick={() => handleOpenDeleteModal(team)}>Eliminar</Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-//     try {
-//       const response = await axios.delete(
-//         `http://localhost:3000/equipos/${selectedTeam._id}`,
-//         {
-//           headers: { token: auth },
-//         }
-//       );
+            <Modal show={show} onHide={handleToogleModal}>
+                <CreateTeamModal show={show} handleClose={handleToogleModal} />
+            </Modal>
 
-//       if (response.status === 200) {
-//         console.log(`Equipo ${selectedTeam.name} eliminado`);
-//         fetchTeams();
-//         setShowDeleteModal(false);
-//       }
-//     } catch (error) {
-//       console.error("Error al eliminar equipo:", error.response ? error.response.data : error);
-//     }
-//   };
+        </div>
+    )
+}
 
-//   useEffect(() => {
-//     fetchTeams();
-//   }, []);
-
-//   const handleOpenDeleteModal = (team) => {
-//     setSelectedTeam(team);
-//     setShowDeleteModal(true);
-//   };
-
-//   return (
-//     <div className="container mt-4">
-//       <h1 className="text-center mb-4">Gestión de Equipos</h1>
-
-//       <Button variant="primary" className="mb-3" onClick={() => handleToogleModal('register')}>
-//         Crear Equipo
-//       </Button>
-
-//       <table className="table table-striped">
-//         <thead>
-//           <tr>
-//             <th>ID</th>
-//             <th>Nombre</th>
-//             <th>Primera Entrada</th>
-//             <th>Acciones</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {teams.map((team, index) => (
-//             <tr key={team._id || index}>
-//               <td>{team._id}</td>
-//               <td>{team.name}</td>
-//               <td>{team.firstEntry}</td>
-//               <td>
-//                 <Button
-//                   variant="warning"
-//                   size="sm"
-//                   className="me-2"
-//                   onClick={() => {
-//                     setSelectedTeam(team);
-//                     setShowEditModal(true);
-//                   }}
-//                 >
-//                   Editar
-//                 </Button>
-//                 <Button
-//                   variant="danger"
-//                   size="sm"
-//                   onClick={() => handleOpenDeleteModal(team)}
-//                 >
-//                   Borrar
-//                 </Button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-
-//       <Modal show={show} onHide={handleCloseModal}>
-//         <Register handleCloseModal={handleCloseModal} />
-//       </Modal>
-
-//       <EditTeamModal
-//         show={showEditModal}
-//         onHide={() => setShowEditModal(false)}
-//         team={selectedTeam}
-//         onSave={handleEditTeam}
-//       />
-
-//       <DeleteTeamModal
-//         showDeleteModal={showDeleteModal}
-//         setShowDeleteModal={setShowDeleteModal}
-//         selectedTeam={selectedTeam}
-//         handleDeleteTeam={handleDeleteTeam}
-//       />
-//     </div>
-//   );
-// };
-
-// export { AdminTeams };
+export { AdminTeams }
