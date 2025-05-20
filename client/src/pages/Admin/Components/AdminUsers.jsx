@@ -135,7 +135,7 @@ const AdminUsers = () => {
                   size="sm"
                   onClick={() => handleOpenDeleteModal(user)}
                 >
-                  Borrar
+                  Eliminar
                 </Button>
               </td>
             </tr>

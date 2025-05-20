@@ -32,6 +32,16 @@ const DriverList = ({ drivers }) => {
               data-bs-parent="#driverAccordion"
             >
               <div className="accordion-body">
+                {driver.driverImg && (
+                  <div className="text-center my-3">
+                    <img
+                      src={`http://localhost:3000/uploads/drivers/${driver.driverImg}`}
+                      alt={`${driver.name} ${driver.lastname}`}
+                      className="img-fluid rounded"
+                      style={{ maxWidth: '300px' }}
+                    />
+                  </div>
+                )}
                 <p><strong>Fecha de nacimiento:</strong> {driver.birthdate}</p>
                 <p><strong>Nacionalidad:</strong> {driver.country}</p>
                 <p><strong>Equipo:</strong> {driver.team.name || 'No tiene'}</p>
@@ -51,4 +61,4 @@ const DriverList = ({ drivers }) => {
   );
 };
 
-export {DriverList}
+export { DriverList }

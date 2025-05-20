@@ -16,7 +16,7 @@ export const driverValidate = (data) => {
     const schema = Joi.object({
         name: Joi.string().min(3).max(30).required(),
         lastname: Joi.string().min(3).max(30).required(),
-        team: Joi.string().min(3).max(100),
+        team: Joi.string().min(3).max(100).allow(null, ''),
         number: Joi.number().required(),
         birth: Joi.date().required(),
         country: Joi.string().min(3).max(30).required(),
@@ -39,8 +39,8 @@ export const teamValidate = (data) => {
         firstEntry: Joi.number().required(),
         constructorPoints: Joi.number().required(),
         constructorChampionships: Joi.number().required(),
-        driverOne: Joi.string().min(3).max(100),
-        driverTwo: Joi.string().min(3).max(100),
+        driverOne: Joi.string().min(3).max(100).allow(null, ''),
+        driverTwo: Joi.string().min(3).max(100).allow(null, ''),
         logoImg: Joi.string().required()
     })
     return schema.validate(data);

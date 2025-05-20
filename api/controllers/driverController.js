@@ -1,6 +1,8 @@
 import Driver from "../model/driverModel.js";
 import Team from "../model/teamModel.js";
 import { driverValidate } from "../validations/validation.js";
+import fs from "fs";
+import path from "path";
 
 // Obtener todos los conductores
 const getAllDrivers = async (req, res) => {
@@ -41,15 +43,30 @@ const createDriver = async (req, res) => {
 // Actualizar un conductor existente
 const updateDriver = async (req, res) => {
     try {
-        const updatedDriver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedDriver) {
+        const existingDriver = await Driver.findById(req.params.id);
+
+        if (!existingDriver) {
             return res.status(404).json({ message: "Conductor no encontrado" });
         }
-        res.status(200).json({ message: "Conductor editado" });
+
+        const newImage = req.body.driverImg;
+        const oldImage = existingDriver.driverImg;
+
+        if (newImage && oldImage && newImage !== oldImage) {
+            const oldImagePath = path.join(process.cwd(), 'uploads', 'drivers', oldImage);
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+            }
+        }
+        const updatedDriver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+        res.status(200).json({ message: "Conductor editado", updatedDriver });
+
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // Eliminar un conductor
 const deleteDriver = async (req, res) => {
@@ -58,11 +75,18 @@ const deleteDriver = async (req, res) => {
         if (!deletedDriver) {
             return res.status(404).json({ message: "Conductor no encontrado" });
         }
-        res.status(200).json({ message: "Conductor eliminado" });
+        const imagePath = path.join(process.cwd(), 'uploads', 'drivers', deletedDriver.driverImg);
+        if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
+        }
+
+        res.status(200).json({ message: "Conductor eliminado y archivo limpiado" });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
+
 
 // Buscar por nombre
 const searchByName = async (req, res) => {

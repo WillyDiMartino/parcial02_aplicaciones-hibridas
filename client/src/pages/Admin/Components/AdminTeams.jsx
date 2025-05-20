@@ -1,22 +1,61 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Modal, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { AuthContext } from '../../../context/AuthContext';
 import { CreateTeamModal } from '../Modals/Teams/CreateTeamModal';
+import { EditTeamModal } from '../Modals/Teams/EditTeamModal';
+import { DeleteTeamModal } from '../Modals/Teams/DeleteTeamModal';
 
 const AdminTeams = () => {
-    const [teams, setTeams] = useState([]);
     const { auth } = useContext(AuthContext);
+    const [teams, setTeams] = useState([]);
+
     const [show, setShow] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [selectedTeam, setSelectedTeam] = useState(null);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [teamToDelete, setTeamToDelete] = useState(null);
 
     const handleToogleModal = () => setShow(!show);
+
+    const handleOpenEditModal = (team) => {
+        setSelectedTeam(team);
+        setShowEditModal(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setSelectedTeam(null);
+        setShowEditModal(false);
+    };
+
+    const handleOpenDeleteModal = (team) => {
+        setTeamToDelete(team);
+        setShowDeleteModal(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setTeamToDelete(null);
+        setShowDeleteModal(false);
+    };
+
+    const handleDeleteTeam = async () => {
+        try {
+            await axios.delete(`http://localhost:3000/api/equipos/${teamToDelete._id}`, {
+                headers: { token: auth },
+            });
+            fetchTeams();
+            handleCloseDeleteModal();
+        } catch (error) {
+            console.error("Error al eliminar el equipo:", error.response?.data || error.message);
+        }
+    };
 
     const fetchTeams = async () => {
         try {
             const response = await axios.get('http://localhost:3000/api/equipos', {
                 headers: { token: auth },
             });
-
             setTeams(response.data);
         } catch (error) {
             console.error('Error al obtener equipos:', error);
@@ -50,7 +89,7 @@ const AdminTeams = () => {
                 </thead>
                 <tbody>
                     {teams.map((team, index) => (
-                        <tr key={team.id || index}>
+                        <tr key={team._id || index}>
                             <td>{team.name}</td>
                             <td>{team.base}</td>
                             <td>{team.teamChief}</td>
@@ -58,11 +97,11 @@ const AdminTeams = () => {
                             <td>{team.firstEntry}</td>
                             <td>{team.constructorPoints}</td>
                             <td>{team.constructorChampionships}</td>
-                            <td>{team.driverOne.lastname}</td>
-                            <td>{team.driverTwo.lastname}</td>
-                            <td>{team.logo}</td>
+                            <td>{team.driverOne?.lastname || '-'}</td>
+                            <td>{team.driverTwo?.lastname || '-'}</td>
+                            <td>{team.logoImg}</td>
                             <td>
-                                <Button className='btn-edit me-2'>Editar</Button>
+                                <Button className='btn-edit me-2' onClick={() => handleOpenEditModal(team)}>Editar</Button>
                                 <Button className='btn-delete' onClick={() => handleOpenDeleteModal(team)}>Eliminar</Button>
                             </td>
                         </tr>
@@ -70,12 +109,24 @@ const AdminTeams = () => {
                 </tbody>
             </table>
 
-            <Modal show={show} onHide={handleToogleModal}>
-                <CreateTeamModal show={show} handleClose={handleToogleModal} />
-            </Modal>
-
+            {}
+            {show && <CreateTeamModal show={show} handleClose={handleToogleModal} />}
+            {showEditModal && (
+                <EditTeamModal
+                    team={selectedTeam}
+                    show={showEditModal}
+                    handleClose={handleCloseEditModal}
+                    onUpdate={fetchTeams}
+                />
+            )}
+            <DeleteTeamModal
+                show={showDeleteModal}
+                handleClose={handleCloseDeleteModal}
+                team={teamToDelete}
+                onConfirm={handleDeleteTeam}
+            />
         </div>
-    )
-}
+    );
+};
 
-export { AdminTeams }
+export { AdminTeams };

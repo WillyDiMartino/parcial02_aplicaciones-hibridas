@@ -34,7 +34,7 @@ app.use('/documentacion', (req, res) => {
 app.use("/usuarios", userRoute);
 app.use("/api/corredores", driverRoute);
 app.use("/api/equipos", teamRoute);
-
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 app.use(
   "/admin",

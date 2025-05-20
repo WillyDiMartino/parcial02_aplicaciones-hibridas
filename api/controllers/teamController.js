@@ -1,7 +1,6 @@
 import Teams from "../model/teamModel.js";
 import { teamValidate } from "../validations/validation.js";
 
-
 const getAllTeams = async (req, res) => {
     try {
         const teams = await Teams.find().populate('driverOne').populate('driverTwo'); 

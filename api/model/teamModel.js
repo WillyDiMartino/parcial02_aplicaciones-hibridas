@@ -14,4 +14,3 @@ const teamsSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("teams", teamsSchema);
- null

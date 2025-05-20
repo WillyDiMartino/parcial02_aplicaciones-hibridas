@@ -1,5 +1,6 @@
 import express from "express";
 import { auth, verificarRol } from "../middlewares/middlewares.js";
+import { uploadDriverImage } from "../middlewares/upload.js";
 
 import { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName, searchByLastName, sortByPoints, filterByRaceWins, filterByWorldChampionship} from "../controllers/driverController.js";
 
@@ -15,7 +16,12 @@ driverRouter.get("/search/lastname", auth,  searchByLastName);
 driverRouter.get("/sort/points", auth,  sortByPoints);
 driverRouter.get("/filter/wins", auth,  filterByRaceWins);
 driverRouter.get("/filter/championship", auth,  filterByWorldChampionship);
-
+driverRouter.post("/upload/image", auth, verificarRol(["admin", "super-admin"]), uploadDriverImage.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No se subió ningún archivo" });
+  }
+  res.status(200).json({ filename: req.file.filename });
+});
 
 
 export default driverRouter;
