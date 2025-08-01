@@ -110,14 +110,14 @@ const AdminTeams = () => {
             </table>
 
             {}
-            {show && <CreateTeamModal show={show} handleClose={handleToogleModal} />}
-            {showEditModal && (
-                <EditTeamModal
-                    team={selectedTeam}
-                    show={showEditModal}
-                    handleClose={handleCloseEditModal}
-                    onUpdate={fetchTeams}
-                />
+            {show && (<CreateTeamModal show={show} handleClose={handleToogleModal} onCreated={fetchTeams} />
+            )}
+            {showEditModal && (<EditTeamModal
+                team={selectedTeam}
+                show={showEditModal}
+                handleClose={handleCloseEditModal}
+                onUpdate={fetchTeams}
+            />
             )}
             <DeleteTeamModal
                 show={showDeleteModal}

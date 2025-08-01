@@ -1,5 +1,7 @@
 import Teams from "../model/teamModel.js";
 import { teamValidate } from "../validations/validation.js";
+import fs from "fs";
+import path from "path";
 
 const getAllTeams = async (req, res) => {
     try {
@@ -35,9 +37,20 @@ const createTeam = async (req, res) => {
 
 const updateTeam = async (req, res) => {
     try {
+        const existingTeam = await Teams.findById(req.params.id);
+        if (!existingTeam) {
+            return res.status(404).json({ message: "Equipo no encontrado" });
+        }
+        const newLogo = req.body.logoImg;
+        const oldLogo = existingTeam.logoImg;
+        if (newLogo && oldLogo && newLogo !== oldLogo) {
+            const oldPath = path.join(process.cwd(), 'uploads', 'teams', oldLogo);
+            if (fs.existsSync(oldPath)) {
+                fs.unlinkSync(oldPath);
+            }
+        }
         const updatedTeam = await Teams.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedTeam) return res.status(404).json({ message: "Equipo no encontrado" });
-        res.status(200).json({ message: "Equipo editado" });
+        res.status(200).json({ message: "Equipo actualizado", updatedTeam });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

@@ -8,7 +8,7 @@ const Home = () => {
         ¡Bienvenidos a la <strong> API de Fórmula 1</strong>!
       </h2>
       <p className="fs-5">
-        Con toda la información <strong>de los corredores de la <em>parrilla 2024</em></strong> que
+        Con toda la información <strong>de los corredores de la <em>parrilla 2025</em></strong> que
         necesitas. Descubrí más sobre nosotros en la sección de <strong>Nosotros</strong>, y cualquier duda
         dejarnos tu mensaje. Si querés saber como utilizar esta API, visita la sección de <strong>Documentación</strong>.
       </p>

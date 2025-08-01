@@ -1,58 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const DriverList = ({ drivers }) => {
-  const [openDriver, setOpenDriver] = useState(null);
-
-  const toggleDriverInfo = (driverId) => {
-    setOpenDriver(openDriver === driverId ? null : driverId);
-  };
-
   return (
     <div className="container my-5">
-      <div className="accordion" id="driverAccordion">
+      <div className="row g-4 justify-content-center">
         {drivers.map((driver) => (
-          <div key={driver._id} className="accordion-item">
-            <h2 className="accordion-header" id={`heading${driver._id}`}>
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={`#collapse${driver._id}`}
-                aria-expanded={openDriver === driver._id ? 'true' : 'false'}
-                aria-controls={`collapse${driver._id}`}
-                onClick={() => toggleDriverInfo(driver._id)}
-              >
-                {driver.number} - {driver.name} {driver.lastname}
-              </button>
-            </h2>
-            <div
-              id={`collapse${driver._id}`}
-              className={`accordion-collapse collapse ${openDriver === driver._id ? 'show' : ''}`}
-              aria-labelledby={`heading${driver._id}`}
-              data-bs-parent="#driverAccordion"
-            >
-              <div className="accordion-body">
-                {driver.driverImg && (
-                  <div className="text-center my-3">
-                    <img
-                      src={`http://localhost:3000/uploads/drivers/${driver.driverImg}`}
-                      alt={`${driver.name} ${driver.lastname}`}
-                      className="img-fluid rounded"
-                      style={{ maxWidth: '300px' }}
-                    />
-                  </div>
-                )}
-                <p><strong>Fecha de nacimiento:</strong> {driver.birthdate}</p>
-                <p><strong>Nacionalidad:</strong> {driver.country}</p>
-                <p><strong>Equipo:</strong> {driver.team.name || 'No tiene'}</p>
-                <div>
-                  <p><strong>Puntos:</strong> {driver.points24}</p>
-                  <p><strong>Carreras ganadas:</strong> {driver.raceWins}</p>
-                  <p><strong>Podios:</strong> {driver.podiums}</p>
-                  <p><strong>Campeonatos mundiales:</strong> {driver.worldChampionships}</p>
+          <div key={driver._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div className="card shadow-sm border-0 position-relative p-3 text-center h-100">
+
+              {}
+              <div className="d-flex justify-content-between align-items-start">
+                <div className="fw-bold fs-4 text-dark">{driver.number}</div>
+                <div className="text-end">
+                  <div className="fw-bold fs-5">{driver.points24}</div>
+                  <div className="small text-muted">PTS</div>
                 </div>
-                <p><strong>Grandes premios:</strong> {driver.grandPrixEntered}</p>
               </div>
+
+              {}
+              <div className="mt-2">
+                <div className="text-uppercase fw-bold text-warning small">{driver.name}</div>
+                <div className="fs-5 text-dark">{driver.lastname}</div>
+              </div>
+
+              {}
+              <div className="text-muted small">{driver.country}</div>
+
+              {}
+              <div className="text-primary mb-2 small">
+                {driver.team?.name || 'Sin equipo'}
+              </div>
+
+              {}
+              {driver.driverImg && (
+                <img
+                  src={`http://localhost:3000/uploads/drivers/${driver.driverImg}`}
+                  alt={`${driver.name} ${driver.lastname}`}
+                  className="img-fluid my-2"
+                  style={{
+                    maxHeight: '180px',
+                    objectFit: 'contain',
+                    borderRadius: '10px',
+                  }}
+                />
+              )}
             </div>
           </div>
         ))}
@@ -61,4 +52,4 @@ const DriverList = ({ drivers }) => {
   );
 };
 
-export { DriverList }
+export { DriverList };

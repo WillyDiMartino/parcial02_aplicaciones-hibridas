@@ -29,7 +29,7 @@ const Footer = () => {
                 </ul>
             </div>
 
-            <p>&copy; 2021 Formula 1 API - Di Martino - Paravic</p>
+            <p>&copy; 2025 Formula 1 API - Di Martino - Paravic</p>
         </footer>
     );
 }
